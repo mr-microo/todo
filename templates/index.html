@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f5f2">
+  <title>Daymark — Make room for what matters</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.module.js"}}</script>
+  <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body>
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Daymark home"><span class="brand-mark">d</span>daymark</a>
+      <div class="topbar-note"><span class="status-dot"></span> Your space, in focus</div>
+      <span class="date-label" id="today-label"></span>
+    </header>
+
+    <main class="layout">
+      <section class="intro">
+        <p class="eyebrow">A LITTLE CLARITY GOES A LONG WAY</p>
+        <h1>Make room for<br><em>what matters.</em></h1>
+        <p class="intro-copy">One thing at a time. You’ve got this.</p>
+        <div class="stats">
+          <div class="stat-card"><span class="stat-icon pending-icon">↗</span><div><strong id="pending-count">—</strong><span>To take care of</span></div></div>
+          <div class="stat-card"><span class="stat-icon done-icon">✓</span><div><strong id="completed-count">—</strong><span>Already done</span></div></div>
+        </div>
+        <div class="orbit-caption"><span class="caption-line"></span><span>A steady pace is still progress</span></div>
+      </section>
+
+      <section class="workspace" aria-label="Your tasks">
+        <div class="workspace-head">
+          <div><p class="section-kicker">YOUR DAY</p><h2>Tasks <span id="visible-count" class="count-pill">0</span></h2></div>
+          <button class="add-button" id="open-form"><span>＋</span> New task</button>
+        </div>
+        <form class="task-form" id="task-form" hidden>
+          <div class="form-heading"><h3 id="form-title">Add a task</h3><button type="button" class="icon-button" id="close-form" aria-label="Close form">×</button></div>
+          <label class="sr-only" for="task-title">Task title</label>
+          <input id="task-title" name="title" maxlength="160" placeholder="What needs your attention?" required>
+          <label class="sr-only" for="task-description">Description</label>
+          <textarea id="task-description" name="description" rows="2" maxlength="5000" placeholder="Add a note (optional)"></textarea>
+          <div class="form-options">
+            <label>Priority<select id="task-priority" name="priority"><option>Low</option><option selected>Medium</option><option>High</option></select></label>
+            <label>Due date<input id="task-due" name="due_date" type="datetime-local"></label>
+          </div>
+          <div class="form-actions"><button type="button" class="text-button" id="cancel-form">Cancel</button><button class="save-button" type="submit" id="save-task">Save task <span>↗</span></button></div>
+        </form>
+
+        <div class="toolbar">
+          <div class="filter-tabs" role="group" aria-label="Filter tasks">
+            <button class="filter-tab active" data-filter="all">All</button><button class="filter-tab" data-filter="pending">To do</button><button class="filter-tab" data-filter="completed">Done</button>
+          </div>
+          <div class="toolbar-tools">
+            <label class="search-box"><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Search tasks" aria-label="Search tasks"></label>
+            <label class="select-wrap"><span class="sr-only">Priority filter</span><select id="priority-filter"><option value="all">Priority</option><option>High</option><option>Medium</option><option>Low</option></select></label>
+            <label class="select-wrap"><span class="sr-only">Sort tasks</span><select id="sort-select"><option value="created">Newest</option><option value="due">Due date</option><option value="priority">Priority</option></select></label>
+          </div>
+        </div>
+        <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+        <div id="task-list" class="task-list" aria-live="polite"><div class="loading-state"><span class="spinner"></span> Finding your focus...</div></div>
+        <footer class="list-footer"><span><i class="footer-dot"></i> Saved as you go</span><span id="list-summary"></span></footer>
+      </section>
+    </main>
+    <footer class="page-footer"><span>DAYMARK <span class="footer-star">✳</span> YOUR OWN PACE, YOUR OWN PLACE</span><span>Small steps count.</span></footer>
+  </div>
+  <dialog id="confirm-dialog" class="confirm-dialog"><form method="dialog"><span class="dialog-icon">⌫</span><h2>Delete this task?</h2><p>This can’t be undone.</p><div class="dialog-actions"><button class="text-button" value="cancel">Keep it</button><button class="delete-button" value="delete">Delete task</button></div></form></dialog>
+</body>
+</html>

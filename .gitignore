@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Secrets and local environment
+.env*
+!.env.example
+
+# Local databases and instance data
+instance/
+*.db
+*.sqlite
+*.sqlite3
+
+# Vercel and OS/editor files
+.vercel/
+.DS_Store
+Thumbs.db
+*.log
