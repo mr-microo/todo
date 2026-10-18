@@ -1,9 +1,3 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "functions": {
-    "app.py": {
-      "includeFiles": "templates/**",
-      "excludeFiles": "{tests/**,**/*.test.py,**/test_*.py,fixtures/**}"
-    }
-  }
+  "$schema": "https://openapi.vercel.sh/vercel.json"
 }
